@@ -19,7 +19,7 @@ namespace EmpWageProblem
             this.maxHoursPerMonths = maxHoursPerMonths;
         }
 
-        public void setTotalEmpWage(int totalEmpWage)
+        public void setSalary(int totalEmpWage)
         {
             this.totalEmpWage = totalEmpWage;
         }

@@ -4,7 +4,13 @@ using System.Text;
 
 namespace EmpWageProblem
 {
-    class EmpWageBuilder
+    public interface IComputeEmpWage
+    {
+        public void addCompanyEmp(string company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonths);
+        public void computeEmpWage();
+
+    }
+    class EmpWageBuilder : IComputeEmpWage
     {
         public const int IS_PART_TIME = 1;
         public const int IS_FULL_TIME = 2;
@@ -28,7 +34,7 @@ namespace EmpWageProblem
         {
             for (int i = 0; i < companyCount; i++)
             {
-                companyEmpWages[i].setTotalEmpWage(this.computeEmpWage(this.companyEmpWages[i]));
+                companyEmpWages[i].setSalary(this.computeEmpWage(this.companyEmpWages[i]));
                 Console.WriteLine(this.companyEmpWages[i].displaySalary());
             }
         }

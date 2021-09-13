@@ -13,7 +13,7 @@ namespace EmpWageProblem
         private int empRatePerHour;
         private int numOfWorkingDays;
         private int maxHoursPerMonths;
-        private int salary = 0;
+        private int totalEmpWage = 0;
         //passing variable to this class variable
         public EmpWageCalculator(string company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonths)
         {
@@ -47,13 +47,13 @@ namespace EmpWageProblem
                 totalHours += empHour;
                 Console.WriteLine("Day's {0} Emp hours {1}", workingDay, totalHours);
             }
-            salary = totalHours * empRatePerHour;
-            Console.WriteLine("total Emp wage for company: {0} is {1}", company, salary);
+            totalEmpWage = totalHours * empRatePerHour;
+            Console.WriteLine("total Emp wage for company: {0} is {1}", company, totalEmpWage);
         }
         //Display employee wage and his company name
         public string displaySalary()
         {
-            return "total Emp wage for company: " + company + " is " + salary;
+            return "total Emp wage for company: " + company + " is " + totalEmpWage;
         }
     }
 }
