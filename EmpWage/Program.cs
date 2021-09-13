@@ -1,54 +1,66 @@
 ﻿using System;
+using System.IO;
 
-
-namespace EmpWage
+namespace EmpWageProblem
 {
-    public class Program
+    public class EmpWageBuilder
     {
-        public const int IS_PRESENT = 0;
-        public const int IS_ABSENT = 1;
-        public const int IS_PART_TIME = 2;
-        public const int WAGE_PER_HOUR = 20;
-        public const int FULL_DAY_HOUR = 8;
-        public const int MAX_WORKING_DAY = 20;
-        public const int MAX_WORKING_HOUR = 100;
-
-        public static void computeEmpWage()
+        public const int IS_PART_TIME = 1;
+        public const int IS_FULL_TIME = 2;
+        //variables
+        private string company;
+        private int empRatePerHour;
+        private int numOfWorkingDays;
+        private int maxHoursPerMonths;
+        private int totalEmpWage= 0;
+        public EmpWageBuilder(string company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonths)
         {
-            int empHour = 0, salary = 0, workingDay = 0, totalHours = 0;
+            this.company = company;
+            this.empRatePerHour = empRatePerHour;
+            this.numOfWorkingDays = numOfWorkingDays;
+            this.maxHoursPerMonths = maxHoursPerMonths;
+        }
+        public void computeEmpWage()
+        {
+            int empHour = 0, workingDays = 0, totalHours = 0;
             int empCheck;
             Random random = new Random();
-            while (workingDay <= MAX_WORKING_DAY && totalHours <= MAX_WORKING_HOUR)
+            while (workingDays <= numOfWorkingDays && totalHours <= maxHoursPerMonths)
             {
+                workingDays++;
                 empCheck = random.Next(0, 3);
                 switch (empCheck)
                 {
-                    case IS_PRESENT:
-                        empHour = FULL_DAY_HOUR;
-                        workingDay++;
-                        Console.WriteLine("Employee is working full time");
-                        break;
                     case IS_PART_TIME:
-                        empHour = FULL_DAY_HOUR;
-                        workingDay++;
-                        Console.WriteLine("Employee is working part time");
+                        empHour = 4;
                         break;
-                    case IS_ABSENT:
-                        Console.WriteLine("Employee is not working");
-                        empHour = 0;
+                    case IS_FULL_TIME:
+                        empHour = 8;
                         break;
                     default:
-                        Console.WriteLine("Invalid input");
+                        empHour = 0;
                         break;
                 }
                 totalHours += empHour;
+                Console.WriteLine("Day's {0} Emp hours {1}", workingDays, totalHours);
             }
-            salary = totalHours * WAGE_PER_HOUR;
-            Console.WriteLine("Working day is " + workingDay + " total working hour " + totalHours + " Salary earn " + salary);
+            totalEmpWage = totalHours *this.empRatePerHour;
+            Console.WriteLine("total Emp wage for company: {0} is {1}", company, totalEmpWage);
         }
+
+        public string displaySalary()
+        {
+            return "total Emp wage for company: " + company + " is " + totalEmpWage;
+        }
+    }
+    public class Program
+    {
         static void Main(string[] args)
         {
-               computeEmpWage();
+            Console.WriteLine("Welcome to Employee Wage Computation");
+            EmpWageBuilder dmart = new EmpWageBuilder("Dmart", 20, 15, 85);
+            dmart.computeEmpWage();
+            Console.WriteLine(dmart.displaySalary());
         }
     }
 }
