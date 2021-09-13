@@ -2,58 +2,66 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EmpWageProblem
+namespace Emp_Wage
 {
-    public class EmpWageCalculator
+    class CalculateWages
     {
-        public const int IS_PART_TIME = 1;
-        public const int IS_FULL_TIME = 2;
-        //class instance variables
-        private string company;
-        private int empRatePerHour;
-        private int numOfWorkingDays;
-        private int maxHoursPerMonths;
-        private int totalEmpWage = 0;
-        //passing variable to this class variable
-        public EmpWageCalculator(string company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonths)
+        //Class Variables
+        public int oneDay_Sal = 0;
+        public int perHour_Pay = 20;
+        public int perhour;
+        public int total_Wage = 0;
+        string[] cmp_names = new string[3];
+        int[] cmp_wages = new int[3];
+        public int i = 0;
+
+        // Random Function Object creation 
+        public Random emp_random = new Random();
+        //check method for implimentation
+        public void check(string cmp_name, int cmp_num, int max_WorkDay, int tot_MaxHours)
         {
-            this.company = company;
-            this.empRatePerHour = empRatePerHour;
-            this.numOfWorkingDays = numOfWorkingDays;
-            this.maxHoursPerMonths = maxHoursPerMonths;
-        }
-        //Calculating Wage
-        public void computeEmpWage()
-        {
-            int empHour = 0, workingDay = 0, totalHours = 0;
-            int empCheck;
-            Random random = new Random();
-            while (workingDay <= numOfWorkingDays && totalHours <= maxHoursPerMonths)
+            int tot_Workhours = 0;
+            int day = 1;
+            //Whileloop to check condition Days and Hours for each Company 
+            while (day <= max_WorkDay && tot_Workhours <= tot_MaxHours)
             {
-                workingDay++;
-                empCheck = random.Next(0, 3);
-                switch (empCheck)
+                int empcheck = emp_random.Next(0, 3);
+                switch (empcheck)
                 {
-                    case IS_PART_TIME:
-                        empHour = 8;
+                    case 1:
+                        perhour = 8;
                         break;
-                    case IS_FULL_TIME:
-                        empHour = 4;
+                    case 2:
+                        perhour = 4;
                         break;
                     default:
-                        empHour = 0;
+                        perhour = 0;
                         break;
                 }
-                totalHours += empHour;
-                Console.WriteLine("Day's {0} Emp hours {1}", workingDay, totalHours);
+                day++;
+                oneDay_Sal = perhour * perHour_Pay;
+                tot_Workhours = tot_Workhours + perhour;
             }
-            totalEmpWage = totalHours * empRatePerHour;
-            Console.WriteLine("total Emp wage for company: {0} is {1}", company, totalEmpWage);
+            Console.WriteLine();
+            total_Wage = tot_Workhours * perHour_Pay;
+            //Displaying the Wages And Information for Comapnies
+            Console.WriteLine("Comapny Name is : " + cmp_name);
+            Console.WriteLine("Comapny Number is : " + cmp_num);
+            Console.WriteLine("Total Wage  For Month is : " + total_Wage);
+            Console.WriteLine("Total Hours For Month is : " + tot_Workhours);
+            cmp_names[i] = cmp_name;
+            cmp_wages[i] = total_Wage;
+            i++;
         }
-        //Display employee wage and his company name
-        public string displaySalary()
+
+        public void print()
         {
-            return "total Emp wage for company: " + company + " is " + totalEmpWage;
+            Console.WriteLine();
+            Console.WriteLine("Comapny Names and Wages ::");
+            for (int i = 0; i < cmp_names.Length; i++)
+            {
+                Console.WriteLine("Company Name : " + cmp_names[i] + " And its Wage : " + cmp_wages[i]);
+            }
         }
     }
 }

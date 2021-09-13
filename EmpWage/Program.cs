@@ -1,20 +1,20 @@
 ﻿using System;
-using System.IO;
 
-namespace EmpWageProblem
+namespace Emp_Wage
 {
-
-    public class Program
+    // Main Class
+    class Program
     {
         static void Main(string[] args)
         {
-            //Welcome message
-            Console.WriteLine("Welcome to Employee Wage Computation");
-            EmpWageBuilder empWageBuilder = new EmpWageBuilder();
-            empWageBuilder.addCompanyEmp("Dmart", 20, 20, 58);
-            empWageBuilder.addCompanyEmp("Reliance", 25, 10, 70);
-            empWageBuilder.addCompanyEmp("More", 15, 25, 60);
-            empWageBuilder.computeEmpWage();
+            Console.WriteLine("Multiple Company Wages ::");
+            //Object for CalculateWages class 
+            CalculateWages cal = new CalculateWages();
+            //calling check method
+            cal.check("Dmart", 150, 24, 100); //("Company Name", Company_Number, Work_Days, Work_Hours)
+            cal.check("Reliance", 200, 20, 80);
+            cal.check("More", 001, 26, 120);
+            cal.print();
         }
     }
 }
